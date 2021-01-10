@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt')
 // UV_THREADPOOL_SIZE=1 | 1030 req/sec
 // UV_THREADPOOL_SIZE=2 | 2000 req/sec
 // UV_THREADPOOL_SIZE=3 | 2900 req/sec
+// UV_THREADPOOL_SIZE=3 | 3500 req/sec
 
 http.createServer((_, res) => {
     // 2 is the salt to be used
