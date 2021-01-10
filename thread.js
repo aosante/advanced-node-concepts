@@ -1,10 +1,13 @@
 require('dotenv').config()
 process.env.UV_THREADPOOL_SIZE
-// the larger the threadpool size, the better is bcrypt's performance
 const http = require('http')
 const bcrypt = require('bcrypt')
 
 // Default = 3600 req/sec (more below)
+
+// UV_THREADPOOL_SIZE=1 | 1030 req/sec
+// UV_THREADPOOL_SIZE=2 | 2000 req/sec
+// UV_THREADPOOL_SIZE=3 | 2900 req/sec
 
 http.createServer((_, res) => {
     // 2 is the salt to be used
