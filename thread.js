@@ -10,6 +10,9 @@ const bcrypt = require('bcrypt')
 // UV_THREADPOOL_SIZE=3 | 2900 req/sec
 // UV_THREADPOOL_SIZE=3 | 3500 req/sec
 
+/* Increasing the threadpool size increasaes performance because intel processors come with hyperthreading 
+which  in essence makes 1 pysical core = 2 logical cores */
+
 http.createServer((_, res) => {
     // 2 is the salt to be used
     bcrypt.hash('data to be encrypted', 2).then(hash => {
