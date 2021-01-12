@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Queue Section</title>
+</head>
+<body>
+    <button>Kill Main Thread</button>
+
+    <script>
+        function blockEventLoop(i) {
+            // task queue  waits for the call stack to become empty and then executes whatever is inside it (similar or equal to message and job queues)
+            
+            // inside this function, if the blockEventLoop function gets recursively called without any breaking condition, then the call stack will be exceeded
+            // e.g. -> blockEventLoop(i + 1)
+        }
+
+        const btn = document.querySelector('#kill-btn');
+        btn.addEventListener('click', () => blockEventLoop(0), false)
+    </script>
+
+    <p>Some text here</p>
+
+    <button>Just a button</button>
+</body>
+</html>
