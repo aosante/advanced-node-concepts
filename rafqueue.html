@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaF</title>
+</head>
+<body>
+    <button id="btn">Start setTimeout counter</button>
+    <button id="btn2">Start requestAnimationFrame counter</button>
+    <div>setTimeout counter: <span id="st">0</span></div>
+    <div>requestAnimationFrame counter <span id="raf">0</span></div>
+    
+    <script>
+        const st = document.getElementById('st'), raf =document.getElementById('raf')
+        const btn = document.getElementById('btn'), btn2 = document.getElementById('btn2')
+
+        function stCounter(i) {
+            st.innerText = i
+            // this function uses the task queue
+            setTimeout(() => stCounter(i + 1), 0)
+        }   
+        // this counter takes longer to exceed the call stack because the browser updates at a lower refresh rate
+        function rafCounter(i) {
+            raf.innerText = i
+            // this function uses the animation queue
+            requestAnimationFrame(() => {
+                rafCounter(i + 1)
+            })
+        }
+
+        btn.addEventListener('click', () => stCounter(0), 0)
+        btn2.addEventListener('click', () => rafCounter(0), 0)
+        
+    </script>
+</body>
+</html>
