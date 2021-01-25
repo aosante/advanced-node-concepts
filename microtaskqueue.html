@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microtask Queue</title>
+</head>
+<body>
+    <button id="btn">Click Me</button>
+    
+<script>
+    /*
+    When using things as setTimeout and setInterval, thos are scheduled as tasks in the task queue. The mircrotask queue is very similar to the task
+    queue, but it differs in that it runs before the task queue becuse the event loop checks first for microtask queue, and the for the task queue
+    */
+    function scheduleTask() {}
+
+    function scheduleMicrotasks() {}
+    function scheduleWork() {
+        // task queue
+        setTimeout(() => {
+            console.log('First')
+        }, 0)
+        // task queue
+        setTimeout(() => {
+            console.log('Second')
+        }, 0)
+        
+        // microtask queue => this will run first (microtask before task)
+        Promise.resolve().then(() => console.log('First from miscrostask'))
+        Promise.resolve().then(() => console.log('Second from miscrostask'))
+
+        // In this case, this will run last
+        setTimeout(() => Promise.resolve().then(() => console.log('First from microtask')),0)
+        setTimeout(() => Promise.resolve().then(() => console.log('Second from microtask')),0)
+
+        
+        // RESULT
+
+        /*
+        First from miscrostask
+        Second from miscrostask
+        First
+        Second
+        First from microtask
+        Second from microtask
+        */
+
+        // ORDER BETWEEN ALL THREE QUEUES (RAF, TASK, MICROTASK)
+
+    }
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', scheduleWork)
+</script>
+</body>
+</html>
